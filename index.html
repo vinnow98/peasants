@@ -5,14 +5,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Peasants</title>
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <div>
+    <div class="goldSection">
       <div>Total Gold:</div>
       <div id="totalGold">0</div>
     </div>
-
     <button onclick="earn1Gold()">Earn 1 gold</button>
+<p></p>
+<div id="slaveSection">
+    <div><b>Slaves</b> (earns $1 a day)</div>
+    <div class="slaves">Total Slaves</div>
+<div id = "totalSlaves">0</div>
+ <button id = "buySlave" onclick="buySlave()">Buy 1 slave ($10)</button>
+</div>
+
+<p></p>
+<div id = "peasantSection">
+    <div><b>Peasants</b> (costs $1 a day)</div>
+<div class="peasant">Total Peasants</div>
+<div id = "totalPeasants">0</div>
+ <button class = "buyPeasant"onclick="buyPeasant()">Train a Slave into a peasant ($100)</button>
+</div>
+
+<p></p>
+<div id = "soldierSection">
+    <div><b>Soldiers</b> (costs $5 a day)</div>
+<div class="soldiers">Total Soldiers</div>
+<div id = "totalSoldiers">0</div>
+ <button class = "buySoldier"onclick="buySoldier()">Train 3 Peasants into a Soldier ($1000)</button>
+</div>
+
+<p></p>
+<div id="populationSection">Total Population:
+    <div class="totalPopulation">0/200</div>
+</div>
+
+<p></p>
+<div id="soulSection">
+    <button id ="sacrifice" onclick="sacrifice()">Sacrifice a peasant to Mara</button>
+     <div id="totalSouls">0</div>
+</div>
+
   </body>
   <script src="index.js"></script>
 </html>
