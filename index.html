@@ -33,12 +33,17 @@
 
     <p></p>
     <div id="soldierSection">
+        <div id="mySoldiers">
       <div><b>Soldiers</b> (costs $5 a day)</div>
       <div class="soldiers">Total Soldiers:</div>
       <div id="totalSoldiers">0</div>
       <button class="buySoldier" onclick="buySoldier()">
-        Train 3 Peasants into a Soldier ($2000)
+        Train a Soldier with 3 peasants ($2000)
       </button>
+      </div>
+    <div id="enemySoldiers">
+<div id="enemySoldierText"><b><span id="noOfSoldiers"></span></b> enemy soldiers arriving in <u><span id="countDown"></span></u> seconds</div>
+    </div>
     </div>
 
     <p></p>
@@ -71,4 +76,6 @@
     </div>
   </body>
   <script src="index.js"></script>
+  <script src = "nirvana.js"></script>
+  <script src="enemy.js"></script>
 </html>

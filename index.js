@@ -4,8 +4,8 @@ let totalSoldiers = document.querySelector("#totalSoldiers");
 let totalPopulation = document.querySelector(".totalPopulation");
 let totalSouls = document.querySelector("#totalSouls");
 
-gold = 100000;
-slaves = 300;
+gold = 0;
+slaves = 0;
 costOfSlave = 20;
 peasants = 0;
 costOfPeasant = 200;
@@ -17,14 +17,6 @@ showPopulation();
 souls = 0;
 refresh();
 
-//nirvanaSection
-achievedSuffering = false;
-achievedMeditation = false;
-achievedLabour = false;
-labourClicks = 0;
-achievedGoodBehaviour = false;
-reachingNirvarna = setTimeout(activateNirvana, 10000);
-
 //until I can find a better way to refresh on var change.... this will have to do
 function refresh() {
   totalSlaves.textContent = slaves;
@@ -33,12 +25,13 @@ function refresh() {
   showPopulation();
 }
 
+//gold per "day"
 setInterval(() => {
   gold += slaves;
   gold -= peasants;
   gold -= soldiers * 5;
   totalGold();
-}, 1000);
+}, 1100);
 
 //Punishment if negative gold!
 setInterval(() => {
@@ -78,14 +71,6 @@ function totalGold() {
     showSlaves = document.querySelector("#slaveSection");
     showSlaves.style.visibility = "visible";
   }
-  if (slaves > 50) {
-    showPeasants = document.querySelector("#peasantSection");
-    showPeasants.style.visibility = "visible";
-  }
-  if (peasants > 10) {
-    showSoldiers = document.querySelector("#soldierSection");
-    showSoldiers.style.visibility = "visible";
-  }
 }
 
 function earn1Gold() {
@@ -106,6 +91,10 @@ function buySlave() {
   gold -= costOfSlave;
   totalGold();
   slaves++;
+  if (slaves > 50) {
+    showPeasants = document.querySelector("#peasantSection");
+    showPeasants.style.visibility = "visible";
+  }
   refresh();
   showPopulation();
 }
@@ -117,10 +106,16 @@ function buyPeasant() {
   gold -= costOfPeasant;
   totalGold();
   slaves--;
-  totalSlaves.textContent = slaves;
+  refresh();
 
   peasants++;
-  totalPeasants.textContent = peasants;
+  if (peasants > 10) {
+    showSoldiers = document.querySelector("#soldierSection");
+    showSoldiers.style.visibility = "visible";
+    //this starts the first wave of enemies
+    countDown(30);
+  }
+  refresh();
   showPopulation();
   goodBehaviour();
 }
@@ -135,7 +130,7 @@ function buySoldier() {
   totalPeasants.textContent = peasants;
 
   soldiers++;
-  totalSoldiers.textContent = soldiers;
+  refresh();
   showPopulation();
   goodBehaviour();
 }
@@ -172,72 +167,3 @@ function sacrifice() {
   totalSouls.textContent = souls;
 }
 
-function activateNirvana() {
-  console.log("Nirvana activated");
-  meditation();
-  labour();
-}
-
-function suffering() {
-  slaves = 0;
-  peasants = 0;
-  soldiers = 0;
-  refresh();
-  document.querySelector("#suffering").style.visibility = "hidden";
-  document.querySelector(".suffering").style.opacity = 1;
-  achievedSuffering = true;
-  reachedNirvana();
-}
-
-var meditationTimeout = false;
-function meditation() {
-  clearTimeout(meditationTimeout);
-  meditationTimeout = setTimeout(function () {
-    alert("You have meditated sufficiently.");
-    achievedMeditation = true;
-    document.querySelector(".meditation").style.opacity = 1;
-    document.removeEventListener("keydown", meditation);
-    document.removeEventListener("mousedown", meditation);
-    document.removeEventListener("mousemove", meditation);
-    reachedNirvana();
-  }, 5000);
-  document.addEventListener("keydown", meditation);
-  document.addEventListener("mousedown", meditation);
-  document.addEventListener("mousemove", meditation);
-}
-
-labourTimeout = false;
-function labour() {
-  document.getElementById("earn1Gold").addEventListener("click", () => {
-    labourClicks++;
-    console.log(labourClicks);
-    clearTimeout(labourTimeout);
-    labourTimeout = setTimeout(() => {
-      labourClicks = 0;
-    }, 2000);
-  });
-}
-
-function goodBehaviour() {
-  if (!slaves && peasants && soldiers && !achievedGoodBehaviour) {
-    alert("You have paid all your workers fairly.");
-    document.querySelector(".goodBehaviour").style.opacity = 1;
-    achievedGoodBehaviour = true;
-  }
-  reachedNirvana();
-}
-
-function reachedNirvana() {
-  if (
-    achievedGoodBehaviour &&
-    achievedLabour &&
-    achievedMeditation &&
-    achievedSuffering
-  ) {
-    document.querySelector("#reachedNirvana").disabled = false;
-  }
-}
-
-function winTheGame() {
-  alert("you won");
-}

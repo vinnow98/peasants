@@ -9,7 +9,10 @@
 #soldierSection{
     visibility: hidden;
 }
-
+#enemySoldiers{
+    color: red;
+    
+}
 #addPopulation{
     visibility:hidden;
 }
@@ -20,8 +23,4 @@
 
 .nirvana{
     opacity: 0.2;
-}
-
-#reachedNirvana{
-
 }
