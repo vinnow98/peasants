@@ -9,3 +9,19 @@
 #soldierSection{
     visibility: hidden;
 }
+
+#addPopulation{
+    visibility:hidden;
+}
+
+#suffering{
+    visibility:hidden;
+}
+
+.nirvana{
+    opacity: 0.2;
+}
+
+#reachedNirvana{
+
+}

@@ -11,12 +11,12 @@ desiese strikes (1/2 population dies)
 
  suffering, and that meditation, spiritual and physical labor, and good behavior
 
-suffering - kill your entire population
+suffering - kill your entire population. Only in sacrificing all things wil you bless the thing you love.
 
-meditation - dont touch anything for 2mins?
+meditation - dont touch anything for 2mins? Learning to be still,t o really be still and letlife happen - that stillness becomes a radiance
 
-Labour - press earn 1 gold 200 times?
+Labour - press earn 1 gold 200 times? It is only through your labour and painful effort, by grim energy and resolute courage, that we move on to better things
 
-Good behaviour - Dont own any knights after a certain period
+Good behaviour - Dont own any slaves after a certain period.All workers deserve a fair wage.
 
 pay for hints with souls sacrificed to Mara
