@@ -8,72 +8,87 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <h1>Peasants</h1>
+   <div id="statsSection">
     <div class="goldSection">
-      <div>Total Gold:</div>
+      <div>Gold($):</div>
       <div id="totalGold">0</div>
+      <button id= "earn1Gold" onclick="earn1Gold()">Earn 1 gold</button>
     </div>
-    <button id= "earn1Gold" onclick="earn1Gold()">Earn 1 gold</button>
-    <p></p>
+    <div id="woodSection">
+<div>Wood(w): </div>
+<div id="totalWood">0</div>
+<button id="sell1Wood" onclick="sell1Wood()">Sell 1 Wood (+$5)</button>
+    </div>
+     <div id="populationSection">
+     <div>Population:</div>
+      <div class="totalPopulation">0/200</div>
+      <button id="addPopulation" onclick="addPopulation()">
+        Buy additional housing (-$1000,-w1000)
+      </button>
+      <button id="suffering" onclick="suffering()"title="Sacrifice ALL your population to achieve suffering">Sacrifice ALL to achieve <b>SUFFERING</b>
+      </button>
+      </div>
+    </div>
+
+    <div id="yourHumans">
     <div id="slaveSection">
-      <div><b>Slaves</b> (earns $1 a day)</div>
+      <b>Slaves</b>(+$2/day)
       <div class="slaves">Total Slaves:</div>
       <div id="totalSlaves">0</div>
       <button id="buySlave" onclick="buySlave()">Buy 1 slave ($20)</button>
     </div>
 
-    <p></p>
     <div id="peasantSection">
-      <div><b>Peasants</b> (costs $1 a day)</div>
+    <b>Peasants</b>(-$1/day,+1w/day)
       <div class="peasant">Total Peasants:</div>
       <div id="totalPeasants">0</div>
       <button class="buyPeasant" onclick="buyPeasant()">
         Train a Slave into a peasant ($200)
       </button>
-    </div>
+       </div>
 
-    <p></p>
-    <div id="soldierSection">
-        <div id="mySoldiers">
-      <div><b>Soldiers</b> (costs $5 a day)</div>
+       <div id="soldierSection">
+      <b>Soldiers</b>(-$5/day)
       <div class="soldiers">Total Soldiers:</div>
       <div id="totalSoldiers">0</div>
       <button class="buySoldier" onclick="buySoldier()">
-        Train a Soldier with 3 peasants ($2000)
+        Train a Soldier with 3 peasants ($1000)
       </button>
-      </div>
-    <div id="enemySoldiers">
-<div id="enemySoldierText"><b><span id="noOfSoldiers"></span></b> enemy soldiers arriving in <u><span id="countDown"></span></u> seconds</div>
     </div>
+</div>
+  <div id="bottomSection">
+  <div id="sacrificeSection">
+    <button id="sacrifice" onclick="sacrifice()">
+      Sacrifice a brave soldier to seek Samantabhadra
+    </button>
+    <div id="sacrificeResult">Will they find the truth?</div>
+    <div id="sacrificeSuccess">
+      <label for="sacrificeOptions">You found a way to the truth!</label>
+      <select name="sacrificeOptions" id="sacrificeOptions" onchange="hints(this.value)">
+        <option value="">Choose a truth</option>
+        <option value="suffering">Suffering</option>
+        <option value="meditation">Meditation</option>
+        <option value="labour">Labour</option>
+        <option value="goodBehaviour">Good Behaviour</option>
+      </select>
     </div>
+  </div>
 
-    <p></p>
-    <div id="populationSection">
-      Total Population:
-      <div class="totalPopulation">0/200</div>
-      <button id="addPopulation" onclick="addPopulation()">
-        Buy an additional slave quarters
-      </button>
-      <button id="suffering" onclick="suffering()">
-        Sacrifice ALL your population to attain knowledge of <em>suffering</em>
-      </button>
-    </div>
+  <div id="nirvanaSection">
+    <button id="reachedNirvana" disabled onclick="winTheGame()">Achieve Nirvana</button>
+    <div class="nirvana suffering">Suffering</div>
+    <div class="nirvana meditation">Meditation</div>
+    <div class="nirvana labour">Labour</div>
+    <div class="nirvana goodBehaviour">Good Behaviour</div>
+  </div>
 
-    <p></p>
-    <div id="soulSection">
-      <button id="sacrifice" onclick="sacrifice()">
-        Sacrifice a brave soldier to seek Samantabhadra
-      </button>
-      <div>Total Souls:</div>
-      <div id="totalSouls">0</div>
-    </div>
+  <div id="enemySoldiers">
+    <div id="enemySoldierText"><b><span id="noOfSoldiers"></span></b> enemy soldiers arriving in <u><span id="countDown"></span></u> days</div>
+  </div>
+</div>
 
-    <div id="nirvanaSection">
-      <button id="reachedNirvana" disabled onclick="winTheGame()">Achieve Nirvana</button>
-      <div class="nirvana suffering">Suffering</div>
-      <div class="nirvana meditation">Meditation</div>
-      <div class="nirvana labour">Labour</div>
-      <div class="nirvana goodBehaviour">Good Behaviour</div>
-    </div>
+
   </body>
   <script src="index.js"></script>
   <script src = "nirvana.js"></script>

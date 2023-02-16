@@ -4,17 +4,17 @@ let totalSoldiers = document.querySelector("#totalSoldiers");
 let totalPopulation = document.querySelector(".totalPopulation");
 let totalSouls = document.querySelector("#totalSouls");
 
-gold = 0;
+gold = 100;
+wood = 0;
 slaves = 0;
 costOfSlave = 20;
 peasants = 0;
 costOfPeasant = 200;
 soldiers = 0;
-costofSoldier = 2000;
+costofSoldier = 1000;
 population = 0;
-maxPopulation = 200;
+maxPopulation = 100;
 showPopulation();
-souls = 0;
 refresh();
 
 //until I can find a better way to refresh on var change.... this will have to do
@@ -27,10 +27,12 @@ function refresh() {
 
 //gold per "day"
 setInterval(() => {
-  gold += slaves;
+  gold += slaves * 2;
+  wood += peasants;
   gold -= peasants;
   gold -= soldiers * 5;
   totalGold();
+  totalWood();
 }, 1100);
 
 //Punishment if negative gold!
@@ -58,7 +60,7 @@ setInterval(() => {
     }
 
     if (gold < -1000) {
-      alert("you died");
+      youDied();
     }
     refresh();
   }
@@ -67,9 +69,10 @@ setInterval(() => {
 function totalGold() {
   let totalGold = document.querySelector("#totalGold");
   totalGold.textContent = gold;
-  if (gold > 50) {
+  if (gold > 100) {
     showSlaves = document.querySelector("#slaveSection");
     showSlaves.style.visibility = "visible";
+    countDown(90);
   }
 }
 
@@ -84,6 +87,16 @@ function earn1Gold() {
   }
 }
 
+function sell1Wood() {
+  if (!wood) return;
+  wood -= 1;
+  gold += 5;
+  totalGold();
+  totalWood();
+}
+function totalWood() {
+  document.querySelector("#totalWood").textContent = wood;
+}
 function buySlave() {
   if (gold < costOfSlave) {
     return;
@@ -91,7 +104,8 @@ function buySlave() {
   gold -= costOfSlave;
   totalGold();
   slaves++;
-  if (slaves > 50) {
+  document.querySelector("#populationSection").style.visibility = "visible";
+  if (slaves > 25) {
     showPeasants = document.querySelector("#peasantSection");
     showPeasants.style.visibility = "visible";
   }
@@ -107,13 +121,12 @@ function buyPeasant() {
   totalGold();
   slaves--;
   refresh();
-
+  document.querySelector("#woodSection").style.visibility = "visible";
   peasants++;
-  if (peasants > 10) {
+  if (peasants > 5) {
     showSoldiers = document.querySelector("#soldierSection");
     showSoldiers.style.visibility = "visible";
     //this starts the first wave of enemies
-    countDown(30);
   }
   refresh();
   showPopulation();
@@ -133,6 +146,9 @@ function buySoldier() {
   refresh();
   showPopulation();
   goodBehaviour();
+  if (soldiers > 5) {
+    document.querySelector("#sacrificeSection").style.visibility = "visible";
+  }
 }
 
 function showPopulation() {
@@ -153,17 +169,19 @@ function showPopulation() {
 }
 
 function addPopulation() {
-  document.getElementById("addPopulation").disabled = true;
+  if (gold < 1001 || wood < 1001) return;
   maxPopulation += 100;
+  gold -= 1000;
+  wood -= 100;
+  totalGold();
+  totalWood();
+  if (maxPopulation == 300) {
+    document.getElementById("addPopulation").disabled = true;
+  }
   showPopulation();
 }
 
-function sacrifice() {
-  if (!soldiers) return;
-  soldiers--;
-  totalSoldiers.textContent = soldiers;
-  souls++;
-  showPopulation();
-  totalSouls.textContent = souls;
+function youDied() {
+  alert("You Died.");
+  location.reload();
 }
-

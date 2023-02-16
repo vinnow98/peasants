@@ -18,6 +18,7 @@ let nextEnemyAttack = () => {
 
 function countDown(num) {
   if (countDownState) return;
+  document.getElementById("enemySoldiers").style.visibility = "visible";
   countDownState = true;
   enemySoldierCount = randomGeneratedEnemies();
   document.querySelector("#noOfSoldiers").textContent = enemySoldierCount;
@@ -46,7 +47,7 @@ function fight() {
       countDownState = false;
       countDown(nextEnemyAttack());
     } else if (soldiers < 0) {
-      alert("you died");
+      youDied();
       clearInterval(timer);
     }
   }, 500);
