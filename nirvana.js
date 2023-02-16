@@ -4,29 +4,43 @@ achievedLabour = false;
 labourClicks = 0;
 achievedGoodBehaviour = false;
 sufferingWinCon = false;
-wincon1 = false;
-wincon2 = false;
-reachingNirvarna = setTimeout(activateNirvana, 100000);
+goodBehaviourWinCon = false;
+labourWinCon = false;
+meditationWinCon = false;
+timeWinCon = false;
+setTimeout(timeToWin, 600000);
+
+function timeToWin() {
+  console.log("timeToWin activated");
+  timeWinCon = true;
+  activateNirvana();
+}
 
 function activateNirvana() {
-  wincon1 = true;
-  if (!wincon1 || !wincon2) return;
-  console.log("Nirvana activated");
-  meditation();
-  labour();
-  sufferingWinCon = true;
-  document.querySelector("#nirvanaSection").style.visibility = "visible";
+  if (
+    (sufferingWinCon ||
+      goodBehaviourWinCon ||
+      labourWinCon ||
+      meditationWinCon) &&
+    timeWinCon
+  ) {
+    console.log("Nirvana activated");
+
+    document.querySelector("#nirvanaSection").style.visibility = "visible";
+  }
 }
 
 function suffering() {
-  if (!sufferingWinCon) return;
   slaves = 0;
   peasants = 0;
   soldiers = 0;
   refresh();
-  document.querySelector("#suffering").style.visibility = "hidden";
   document.querySelector(".suffering").style.opacity = 1;
   achievedSuffering = true;
+  document
+    .getElementById("sacrificeOptions")
+    .querySelector(`option[value="suffering"]`)
+    .remove();
   reachedNirvana();
 }
 
@@ -40,11 +54,19 @@ function meditation() {
     document.removeEventListener("keydown", meditation);
     document.removeEventListener("mousedown", meditation);
     document.removeEventListener("mousemove", meditation);
+    document
+      .getElementById("sacrificeOptions")
+      .querySelector(`option[value="meditation"]`)
+      .remove();
     reachedNirvana();
-  }, 5000);
+  }, 60000);
   document.addEventListener("keydown", meditation);
   document.addEventListener("mousedown", meditation);
   document.addEventListener("mousemove", meditation);
+  if (firstHintMeditation == true) {
+    let sacrificeAnswer = document.getElementById("sacrificeAnswer");
+    sacrificeAnswer.style.visibility = "visible";
+  }
 }
 
 labourTimeout = false;
@@ -60,9 +82,19 @@ function labour() {
 }
 
 function goodBehaviour() {
-  if (!slaves && peasants && soldiers && !achievedGoodBehaviour) {
+  if (
+    !slaves &&
+    peasants &&
+    soldiers &&
+    !achievedGoodBehaviour &&
+    goodBehaviourWinCon
+  ) {
     alert("You have paid all your workers fairly.");
     document.querySelector(".goodBehaviour").style.opacity = 1;
+    document
+      .getElementById("sacrificeOptions")
+      .querySelector(`option[value="goodBehaviour"]`)
+      .remove();
     achievedGoodBehaviour = true;
   }
   reachedNirvana();
@@ -91,7 +123,6 @@ function sacrifice() {
   showPopulation();
   setTimeout(() => {
     var random = Math.floor(Math.random() * 5) + 1;
-
     switch (random) {
       case 1:
         sacrificeResult.textContent =
@@ -112,6 +143,7 @@ function sacrifice() {
         sacrificeResult.textContent = "";
         document.querySelector("#sacrificeSuccess").style.visibility =
           "visible";
+        document.getElementById("sacrificeOptions").selectedIndex = 0;
     }
     if (random <= 4) {
       delaySacrificeResultOriginal();
@@ -128,26 +160,78 @@ function delaySacrificeResultOriginal() {
   setTimeout(sacrificeResultOriginal, 3000);
 }
 
+let firstHintSuffering = false;
+let firstHintMeditation = false;
+let firstHintLabour = false;
+let firstHintGoodBehaviour = false;
+
 function hints(hint) {
   document.querySelector("#sacrificeSuccess").style.visibility = "hidden";
   switch (hint) {
     case "suffering":
-      sacrificeResult.textContent =
-        "Only in sacrificing all things will you bless the thing you love.";
-      break;
+      if (!firstHintSuffering) {
+        sacrificeResult.textContent =
+          "Only in sacrificing all things will you bless the thing you love.";
+        document
+          .getElementById("sacrificeOptions")
+          .querySelector(`option[value="suffering"]`).textContent =
+          "Suffering(2)";
+        firstHintSuffering = true;
+        sufferingWinCon = true;
+        break;
+      } else {
+        sacrificeResult.textContent =
+          "To experience suffering, sacrifice a population of 300";
+        break;
+      }
+
     case "meditation":
-      sacrificeResult.textContent =
-        "Learning to really be still and let life happen: that stillness becomes a radiance.";
-      break;
+      if (!firstHintMeditation) {
+        sacrificeResult.textContent =
+          "Learning to really be still and let life happen: that stillness becomes a radiance.";
+        document
+          .getElementById("sacrificeOptions")
+          .querySelector(`option[value="meditation"]`).textContent =
+          "Meditation(2)";
+        firstHintMeditation = true;
+        meditationWinCon = true;
+        meditation();
+        break;
+      } else {
+        sacrificeResult.textContent = "Do not touch anything for 1 minute.";
+        break;
+      }
     case "labour":
-      sacrificeResult.textContent =
-        "It is only through your own labour that we move on to better things";
-      break;
+      if (!firstHintLabour) {
+        sacrificeResult.textContent =
+          "It is only through your own labour that we move on to better things.";
+        document
+          .getElementById("sacrificeOptions")
+          .querySelector(`option[value="labour"]`).textContent = "Labour(2)";
+        firstHintLabour = true;
+        labourWinCon = true;
+        labour();
+        break;
+      } else {
+        sacrificeResult.textContent = "Click 'Earn 1 gold' 100 times in a row.";
+        break;
+      }
     case "goodBehaviour":
-      sacrificeResult.textContent = "All workers deserve a fair wage.";
-      break;
+      if (!firstHintGoodBehaviour) {
+        sacrificeResult.textContent = "All workers deserve a fair wage.";
+        document
+          .getElementById("sacrificeOptions")
+          .querySelector(`option[value="goodBehaviour"]`).textContent =
+          "Good Behaviour(2)";
+        firstHintGoodBehaviour = true;
+        goodBehaviourWinCon = true;
+        break;
+      } else {
+        sacrificeResult.textContent =
+          "Do not own any slaves while owning peasants and soldiers.";
+        break;
+      }
   }
-  wincon2 = true;
   activateNirvana();
   delaySacrificeResultOriginal();
 }

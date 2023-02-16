@@ -72,6 +72,7 @@ function totalGold() {
   if (gold > 100) {
     showSlaves = document.querySelector("#slaveSection");
     showSlaves.style.visibility = "visible";
+    //this starts the first wave of enemies
     countDown(90);
   }
 }
@@ -79,10 +80,14 @@ function totalGold() {
 function earn1Gold() {
   gold++;
   totalGold();
-  if (labourClicks == 20 && !achievedLabour) {
+  if (labourClicks == 100 && !achievedLabour) {
     alert("You have laboured well.");
     achievedLabour = true;
     document.querySelector(".labour").style.opacity = 1;
+    document
+      .getElementById("sacrificeOptions")
+      .querySelector(`option[value="labour"]`)
+      .remove();
     reachedNirvana();
   }
 }
@@ -91,6 +96,13 @@ function sell1Wood() {
   if (!wood) return;
   wood -= 1;
   gold += 5;
+  totalGold();
+  totalWood();
+}
+
+function sellAllWood() {
+  gold = gold + wood;
+  wood = 0;
   totalGold();
   totalWood();
 }
@@ -114,9 +126,8 @@ function buySlave() {
 }
 
 function buyPeasant() {
-  if (gold < costOfPeasant || slaves < 1) {
-    return;
-  }
+  if (gold < costOfPeasant || slaves < 1) return;
+
   gold -= costOfPeasant;
   totalGold();
   slaves--;
@@ -126,7 +137,6 @@ function buyPeasant() {
   if (peasants > 5) {
     showSoldiers = document.querySelector("#soldierSection");
     showSoldiers.style.visibility = "visible";
-    //this starts the first wave of enemies
   }
   refresh();
   showPopulation();
@@ -134,9 +144,8 @@ function buyPeasant() {
 }
 
 function buySoldier() {
-  if (gold < costofSoldier || peasants < 3) {
-    return;
-  }
+  if (gold < costofSoldier || peasants < 3) return;
+
   gold -= costofSoldier;
   totalGold();
   peasants -= 3;
@@ -161,7 +170,7 @@ function showPopulation() {
   }
   totalPopulation.textContent = `${population}/${maxPopulation}`;
 
-  if (population == 300) {
+  if (population == 300 && sufferingWinCon == true) {
     document.getElementById("suffering").style.visibility = "visible";
   } else {
     document.getElementById("suffering").style.visibility = "hidden";
@@ -172,7 +181,7 @@ function addPopulation() {
   if (gold < 1001 || wood < 1001) return;
   maxPopulation += 100;
   gold -= 1000;
-  wood -= 100;
+  wood -= 1000;
   totalGold();
   totalWood();
   if (maxPopulation == 300) {

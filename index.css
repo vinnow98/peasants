@@ -27,6 +27,9 @@ button{
   align-items: center; 
   width: 120px;
 }
+#sellAllWood{
+    margin-top: 0.5em ;
+}
 #addPopulation{
     white-space: normal;
     visibility:hidden;
