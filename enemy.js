@@ -39,7 +39,7 @@ function fight() {
       minSoldiers++;
       maxSoldiers++;
       countDownState = false;
-      countDown(randomGeneratedNumber(45, 75));
+      countDown(randomGeneratedNumber(45, 65));
     } else if (soldiers < 0) {
       clearInterval(timer);
       youDied();

@@ -5,102 +5,158 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Peasants</title>
-    <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet'>
-<style>
-body {
- font-family: 'Actor';font-size: 22px;
-}
-</style>
+    <link
+      href="https://fonts.googleapis.com/css?family=Actor"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h1>Peasants</h1>
-   <div id="topSection">
-    <div class="goldSection">
-      <div>Gold($):</div>
-      <div id="totalGold">0</div>
-      <button id= "earn1Gold" onclick="earn1Gold()">Earn 1 gold</button>
+    <div id="prologue">
+      <div id="prologueSpeech">
+        You, a Roman Buddhist slaveowner in the 3rd century BC,find yourself
+        amidst the never-ending conflict against the Punic People.
+        <p></p>
+        
+        The eternal war rages on, but can you transcend the chaos and reach the
+        ultimate state of enlightenment - Nirvana - before it is too late?
+      </div>
+      <button id="continue">Continue...</button>
     </div>
-    <div id="woodSection">
-<div>Wood(w): </div>
-<div id="totalWood">0</div>
-<button id="sell1Wood" onclick="sell1Wood()">Sell 1 Wood (+$5)</button>
-<button id="sellAllWood" onclick="sellAllWood()">Sell All Wood (+$1/ea)</button>
-    </div>
-     <div id="populationSection">
-     <div>Population:</div>
-      <div class="totalPopulation">0/200</div>
-      <button id="addPopulation" onclick="addPopulation()">
-        Buy additional housing (-$1000, -w1000)
-      </button>
-      <button id="suffering" onclick="suffering()"title="Sacrifice ALL your population to achieve suffering">Sacrifice ALL to achieve <b>SUFFERING</b>
-      </button>
+    <div id="mainPage" style="display: none">
+      <h1>Peasants</h1>
+      <div id="topSection">
+        <div class="goldSection">
+          <div>Gold($):</div>
+          <div id="totalGold">0</div>
+          <button id="earn1Gold" onclick="earn1Gold()">Earn 1 gold</button>
+        </div>
+        <div id="woodSection">
+          <div>Wood(w):</div>
+          <div id="totalWood">0</div>
+          <button id="sell1Wood" onclick="sell1Wood()">
+            Sell 1 Wood (+$5)
+          </button>
+          <button id="sellAllWood" onclick="sellAllWood()">
+            Sell All Wood (+$1/ea)
+          </button>
+        </div>
+        <div id="populationSection">
+          <div>Population:</div>
+          <div class="totalPopulation">0/200</div>
+          <button id="addPopulation" onclick="addPopulation()">
+            Buy additional housing (-$1000, -w1000)
+          </button>
+          <button
+            id="suffering"
+            onclick="suffering()"
+            title="Sacrifice ALL your population to achieve suffering"
+          >
+            Sacrifice ALL to achieve <b>SUFFERING</b>
+          </button>
+        </div>
+      </div>
+
+      <div id="midSection">
+        <div id="slaveSection">
+          <b>Slaves</b>(+$2/day)
+          <div class="slaves">Total Slaves:</div>
+          <div id="totalSlaves">0</div>
+          <button id="buySlave" onclick="buySlave()">Buy 1 slave ($20)</button>
+        </div>
+
+        <div id="peasantSection">
+          <b>Peasants</b>(-$1/day,+1w/day)
+          <div class="peasant">Total Peasants:</div>
+          <div id="totalPeasants">0</div>
+          <button class="buyPeasant" onclick="buyPeasant()">
+            Train a Slave into a peasant ($200)
+          </button>
+        </div>
+
+        <div id="soldierSection">
+          <b>Soldiers</b>(-$5/day)
+          <div class="soldiers">Total Soldiers:</div>
+          <div id="totalSoldiers">0</div>
+          <button class="buySoldier" onclick="buySoldier()">
+            Train a Soldier with 3 peasants ($1000)
+          </button>
+        </div>
+      </div>
+      <div id="bottomSection">
+        <div id="sacrificeSection">
+          <button id="sacrifice" onclick="sacrifice()">
+            Sacrifice 1 soldier to seek Samantabhadra
+          </button>
+          <div id="sacrificeText">
+            <div id="sacrificeResult">Will they find the truth?</div>
+            <div id="sacrificeSuccess">
+              <label for="sacrificeOptions"
+                >You found a way to the truth!</label
+              >
+              <select
+                name="sacrificeOptions"
+                id="sacrificeOptions"
+                onchange="hints(this.value)"
+              >
+                <option value="">Choose a truth</option>
+                <option value="suffering">Suffering</option>
+                <option value="meditation">Meditation</option>
+                <option value="labour">Labour</option>
+                <option value="goodBehaviour">Good Behaviour</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="nirvanaSection">
+          <button id="reachedNirvana" disabled onclick="winTheGame()">
+            Achieve Nirvana
+          </button>
+          <div id="enlightenment">
+            <div class="nirvana suffering">~Suffering~</div>
+            <div class="nirvana meditation">~Meditation~</div>
+            <div class="nirvana labour">~Labour~</div>
+            <div class="nirvana goodBehaviour">~Good Behaviour~</div>
+          </div>
+        </div>
+
+        <div id="enemySoldiers">
+          <div id="enemySoldierText">
+            <b><span id="noOfSoldiers"></span></b> enemy soldiers arriving in
+            <u><span id="countDown"></span></u> days
+          </div>
+        </div>
       </div>
     </div>
-
-    <div id="midSection">
-    <div id="slaveSection">
-      <b>Slaves</b>(+$2/day)
-      <div class="slaves">Total Slaves:</div>
-      <div id="totalSlaves">0</div>
-      <button id="buySlave" onclick="buySlave()">Buy 1 slave ($20)</button>
-    </div>
-
-    <div id="peasantSection">
-    <b>Peasants</b>(-$1/day,+1w/day)
-      <div class="peasant">Total Peasants:</div>
-      <div id="totalPeasants">0</div>
-      <button class="buyPeasant" onclick="buyPeasant()">
-        Train a Slave into a peasant ($200)
-      </button>
-       </div>
-
-       <div id="soldierSection">
-      <b>Soldiers</b>(-$5/day)
-      <div class="soldiers">Total Soldiers:</div>
-      <div id="totalSoldiers">0</div>
-      <button class="buySoldier" onclick="buySoldier()">
-        Train a Soldier with 3 peasants ($1000)
-      </button>
-    </div>
-</div>
-  <div id="bottomSection">
-  <div id="sacrificeSection">
-    <button id="sacrifice" onclick="sacrifice()">
-      Sacrifice 1 soldier to seek Samantabhadra
-    </button>
-    <div id="sacrificeText">
-    <div id="sacrificeResult">Will they find the truth?</div>
-    <div id="sacrificeSuccess">
-      <label for="sacrificeOptions">You found a way to the truth!</label>
-      <select name="sacrificeOptions" id="sacrificeOptions" onchange="hints(this.value)">
-        <option value="">Choose a truth</option>
-        <option value="suffering">Suffering</option>
-        <option value="meditation">Meditation</option>
-        <option value="labour">Labour</option>
-        <option value="goodBehaviour">Good Behaviour</option>
-      </select>
-      </div>
-    </div>
-  </div>
-
-  <div id="nirvanaSection">
-    <button id="reachedNirvana" disabled onclick="winTheGame()">Achieve Nirvana</button>
-    <div id="enlightenment">
-    <div class="nirvana suffering">~Suffering~</div>
-    <div class="nirvana meditation">~Meditation~</div>
-    <div class="nirvana labour">~Labour~</div>
-    <div class="nirvana goodBehaviour">~Good Behaviour~</div>
-    </div>
-  </div>
-
-  <div id="enemySoldiers">
-    <div id="enemySoldierText"><b><span id="noOfSoldiers"></span></b> enemy soldiers arriving in <u><span id="countDown"></span></u> days</div>
-  </div>
-</div>
-
   </body>
+  <script>
+   window.onload = function() {
+  const prologue = document.getElementById("prologueSpeech");
+const letters = prologue.textContent.split("");
+const newContent = letters
+  .map((letter, index) => {
+    return `<span>${letter}</span>`;
+  }).join("");
+prologue.innerHTML = newContent
+  const spans = document.querySelectorAll("#prologueSpeech span");
+  for (let i = 0; i < spans.length; i++) {
+    spans[i].style.animationDelay = `${i * 0.01}s`;
+      spans[i].style.fontFamily = 'Zeyada,serif';
+    spans[i].classList.add("fade-in-span");
+  }
+
+  document.getElementById("continue").addEventListener("click", function() {
+    document.getElementById("prologue").style.display = "none";
+    document.getElementById("mainPage").style.display = "block";
+  });
+};
+
+
+  </script>
   <script src="index.js"></script>
-  <script src = "nirvana.js"></script>
+  <script src="nirvana.js"></script>
   <script src="enemy.js"></script>
 </html>
