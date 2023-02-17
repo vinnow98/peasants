@@ -1,75 +1,113 @@
-body{
-   padding-left: 5%;
-   padding-right: 5%;
- 
+body {
+  font-size: 1.7vh;
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
 }
 
-h1{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    font-size: 275%;
+h1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  font-size: 275%;
 }
-button{
-    width: 120px;
+button {
+  font-size: 1.6vh;
+  width: 28vw;
 }
-#statsSection{
-    display: flex;
-    justify-content: space-between;
-  
+
+#topSection button {
+  height: 6vh;
+}
+#midSection button {
+  height: 10vh;
+}
+
+#bottomSection button {
+    margin-top: 2vh;
+  height: 11vh;
+}
+#topSection,
+#midSection,
+#bottomSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  opacity: 0.75;
+   border: 1px solid #333;
+    box-shadow: 10px 0 5px -2px #888;
+}
+#topSection {
+  margin-top: -3vh;
+}
+#midSection {
+  margin-top: 6vh;
+}
+
+#bottomSection {
+  margin-top: 9vh;
 }
 .goldSection,
-#populationSection,
 #woodSection,
-#slaveSection,#peasantSection,#soldierSection{
-    display: flex;
-    flex-direction: column;
-  align-items: center; 
-  width: 120px;
+#populationSection,
+#slaveSection,
+#peasantSection,
+#soldierSection,
+#sacrificeSection,
+#nirvanaSection,
+#enemySoldiers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 23vw;
+  word-wrap: break-word;
 }
-#sellAllWood{
-    margin-top: 0.5em ;
+.goldSection {
+  margin-bottom: 7vh;
 }
-#addPopulation{
-    white-space: normal;
-    visibility:hidden;
-}
-#suffering{
-    visibility:hidden;
-    margin: 0.5em
-}
-
-#woodSection{
-    visibility: hidden;
-}
-
-#yourHumans{
-    display: flex;
-    justify-content: space-between;
-}
-#peasantSection,#slaveSection,#soldierSection{
-    width: 120px;
-    word-wrap: break-word;
-    visibility: hidden;
+#sellAllWood,
+#suffering {
+  margin-top: 0.6vh;
 }
 
-#bottomSection{
-display: flex;
-justify-content: space-between;
-margin-top: 20px;
+#addPopulation,
+#suffering {
+  font-size: 1.5vh;
 }
 
-#enemySoldiers,#populationSection,
-#sacrificeSection,#sacrificeSuccess,#nirvanaSection{
-    width: 120px;
-    word-wrap: break-word;
-    visibility: hidden;
-    text-align: center;
+#woodSection,
+#populationSection,
+#addPopulation,
+#suffering,
+#peasantSection,
+#slaveSection,
+#soldierSection,
+#sacrificeSection,
+#sacrificeSuccess,
+#nirvanaSection,
+#enemySoldiers {
+  visibility: hidden;
 }
 
-#enemySoldiers{
-    color: red;
+#enemySoldiers {
+  color: red;
 }
-.nirvana{
-    opacity: 0.2;
+#noOfSoldiers {
+  font-size: 4vh;
+}
+
+.nirvana {
+  opacity: 0.3;
+}
+
+#sacrificeText,
+#enlightenment {
+  margin-top: 2vh;
+  width: 29vw;
+  height: 12vh;
+}
+#enemySoldiers {
+  margin-top: -10vh;
 }

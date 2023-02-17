@@ -4,23 +4,18 @@ let minSoldiers = 1;
 let maxSoldiers = 3;
 
 //random gives me a random number of soldiers
-let randomGeneratedEnemies = () => {
-  var random =
-    Math.floor(Math.random() * (maxSoldiers - minSoldiers + 1)) + minSoldiers;
-  return random;
-};
-let enemySoldierCount = randomGeneratedEnemies();
 
-let nextEnemyAttack = () => {
-  var random = Math.floor(Math.random() * (120 - 60 + 1)) + 30;
-  return random;
-};
+let enemySoldierCount = null;
 
+function randomGeneratedNumber(min, max) {
+  let random = Math.floor(Math.random() * (max - min + 1)) + min;
+  return random;
+}
 function countDown(num) {
   if (countDownState) return;
   document.getElementById("enemySoldiers").style.visibility = "visible";
   countDownState = true;
-  enemySoldierCount = randomGeneratedEnemies();
+  enemySoldierCount = randomGeneratedNumber(minSoldiers, maxSoldiers);
   document.querySelector("#noOfSoldiers").textContent = enemySoldierCount;
   timer = setInterval(() => {
     num--;
@@ -34,7 +29,6 @@ function countDown(num) {
 }
 
 function fight() {
-  console.log(enemySoldierCount);
   let timer = setInterval(() => {
     soldiers--;
     enemySoldierCount--;
@@ -45,10 +39,10 @@ function fight() {
       minSoldiers++;
       maxSoldiers++;
       countDownState = false;
-      countDown(nextEnemyAttack());
+      countDown(randomGeneratedNumber(45, 75));
     } else if (soldiers < 0) {
-      youDied();
       clearInterval(timer);
+      youDied();
     }
   }, 500);
 }

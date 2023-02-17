@@ -22,10 +22,12 @@ function activateNirvana() {
       goodBehaviourWinCon ||
       labourWinCon ||
       meditationWinCon) &&
-    timeWinCon
+    timeWinCon == true
   ) {
     console.log("Nirvana activated");
-
+    labour();
+    goodBehaviour();
+    meditation();
     document.querySelector("#nirvanaSection").style.visibility = "visible";
   }
 }
@@ -46,6 +48,7 @@ function suffering() {
 
 var meditationTimeout = false;
 function meditation() {
+  if (!timeWinCon) return;
   clearTimeout(meditationTimeout);
   meditationTimeout = setTimeout(function () {
     alert("You have meditated sufficiently.");
@@ -63,14 +66,11 @@ function meditation() {
   document.addEventListener("keydown", meditation);
   document.addEventListener("mousedown", meditation);
   document.addEventListener("mousemove", meditation);
-  if (firstHintMeditation == true) {
-    let sacrificeAnswer = document.getElementById("sacrificeAnswer");
-    sacrificeAnswer.style.visibility = "visible";
-  }
 }
 
 labourTimeout = false;
 function labour() {
+  if (!timeWinCon) return;
   document.getElementById("earn1Gold").addEventListener("click", () => {
     labourClicks++;
     console.log(labourClicks);
@@ -87,7 +87,8 @@ function goodBehaviour() {
     peasants &&
     soldiers &&
     !achievedGoodBehaviour &&
-    goodBehaviourWinCon
+    goodBehaviourWinCon &&
+    timeWinCon
   ) {
     alert("You have paid all your workers fairly.");
     document.querySelector(".goodBehaviour").style.opacity = 1;

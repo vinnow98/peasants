@@ -4,7 +4,7 @@ let totalSoldiers = document.querySelector("#totalSoldiers");
 let totalPopulation = document.querySelector(".totalPopulation");
 let totalSouls = document.querySelector("#totalSouls");
 
-gold = 100;
+gold = 1000000;
 wood = 0;
 slaves = 0;
 costOfSlave = 20;
@@ -40,7 +40,7 @@ setInterval(() => {
   if (gold < 0) {
     if (peasants > 1 || soldiers > 1) {
       console.log("Punishment!!");
-      var randomDeath = Math.floor(Math.random() * 2);
+      let randomDeath = Math.floor(Math.random() * 2);
       if (randomDeath == 0) {
         if (!peasants) {
           soldiers--;
@@ -161,22 +161,32 @@ function buySoldier() {
 }
 
 function showPopulation() {
+  updatePopulation();
+  toggleBuyingSlaves();
+  updateSufferingWinCon();
+}
+
+function updatePopulation() {
   population = slaves + peasants + soldiers;
+  totalPopulation.textContent = `${population}/${maxPopulation}`;
+}
+
+function toggleBuyingSlaves() {
   if (population >= maxPopulation) {
     document.getElementById("buySlave").disabled = true;
     document.getElementById("addPopulation").style.visibility = "visible";
   } else {
     document.getElementById("buySlave").disabled = false;
   }
-  totalPopulation.textContent = `${population}/${maxPopulation}`;
+}
 
-  if (population == 300 && sufferingWinCon == true) {
+function updateSufferingWinCon() {
+  if (population == 300 && sufferingWinCon == true && timeWinCon == true) {
     document.getElementById("suffering").style.visibility = "visible";
   } else {
     document.getElementById("suffering").style.visibility = "hidden";
   }
 }
-
 function addPopulation() {
   if (gold < 1001 || wood < 1001) return;
   maxPopulation += 100;
@@ -184,10 +194,11 @@ function addPopulation() {
   wood -= 1000;
   totalGold();
   totalWood();
+  updatePopulation();
+
   if (maxPopulation == 300) {
     document.getElementById("addPopulation").disabled = true;
   }
-  showPopulation();
 }
 
 function youDied() {
