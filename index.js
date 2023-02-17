@@ -194,7 +194,7 @@ function addPopulation() {
   wood -= 1000;
   totalGold();
   totalWood();
-  updatePopulation();
+  showPopulation();
 
   if (maxPopulation == 300) {
     document.getElementById("addPopulation").disabled = true;
