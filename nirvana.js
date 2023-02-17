@@ -8,7 +8,7 @@ goodBehaviourWinCon = false;
 labourWinCon = false;
 meditationWinCon = false;
 timeWinCon = false;
-setTimeout(timeToWin, 300000);
+setTimeout(timeToWin, 600000);
 
 function timeToWin() {
   console.log("timeToWin activated");

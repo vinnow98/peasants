@@ -9,9 +9,16 @@
       href="https://fonts.googleapis.com/css?family=Actor"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Julee&family=Zeyada&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Julee&family=Zeyada&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Julee&family=Liu+Jian+Mao+Cao&family=Zeyada&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Julee&family=Zeyada&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
@@ -20,9 +27,8 @@
         You, a Roman Buddhist slaveowner in the 3rd century BC,find yourself
         amidst the never-ending conflict against the Punic People.
         <p></p>
-        
-        The eternal war rages on, but can you transcend the chaos and reach the
-        ultimate state of enlightenment - Nirvana - before it is too late?
+
+        Can you transcend the chaos and reach the ultimate state of enlightenment - Nirvana - before it is too late?
       </div>
       <button id="continue">Continue...</button>
     </div>
@@ -134,28 +140,29 @@
     </div>
   </body>
   <script>
-   window.onload = function() {
-  const prologue = document.getElementById("prologueSpeech");
-const letters = prologue.textContent.split("");
-const newContent = letters
-  .map((letter, index) => {
-    return `<span>${letter}</span>`;
-  }).join("");
-prologue.innerHTML = newContent
-  const spans = document.querySelectorAll("#prologueSpeech span");
-  for (let i = 0; i < spans.length; i++) {
-    spans[i].style.animationDelay = `${i * 0.01}s`;
-      spans[i].style.fontFamily = 'Julee,serif';
-    spans[i].classList.add("fade-in-span");
-  }
+    window.onload = function () {
+      const prologue = document.getElementById("prologueSpeech");
+      const letters = prologue.textContent.split("");
+      const newContent = letters
+        .map((letter, index) => {
+          return `<span>${letter}</span>`;
+        })
+        .join("");
+      prologue.innerHTML = newContent;
+      const spans = document.querySelectorAll("#prologueSpeech span");
+      for (let i = 0; i < spans.length; i++) {
+        spans[i].style.animationDelay = `${i * 0.01}s`;
+        spans[i].style.fontFamily = "Liu Jian Mao Cao,serif";
+        spans[i].classList.add("fade-in-span");
+      }
 
-  document.getElementById("continue").addEventListener("click", function() {
-    document.getElementById("prologue").style.display = "none";
-    document.getElementById("mainPage").style.display = "block";
-  });
-};
-
-
+      document
+        .getElementById("continue")
+        .addEventListener("click", function () {
+          document.getElementById("prologue").style.display = "none";
+          document.getElementById("mainPage").style.display = "block";
+        });
+    };
   </script>
   <script src="index.js"></script>
   <script src="nirvana.js"></script>
