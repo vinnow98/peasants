@@ -4,7 +4,7 @@ let totalSoldiers = document.querySelector("#totalSoldiers");
 let totalPopulation = document.querySelector(".totalPopulation");
 let totalSouls = document.querySelector("#totalSouls");
 
-gold = 1000000;
+gold = 0;
 wood = 0;
 slaves = 0;
 costOfSlave = 20;
