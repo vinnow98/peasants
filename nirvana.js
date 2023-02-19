@@ -183,7 +183,7 @@ function hints(hint) {
       } else {
         sacrificeResult.textContent =
           "To experience suffering, sacrifice a population of 300";
-        timeWinCon = true;
+      timeToWin();
         break;
       }
 
@@ -201,7 +201,7 @@ function hints(hint) {
         break;
       } else {
         sacrificeResult.textContent = "Do not touch anything for 1 minute.";
-        timeWinCon = true;
+      timeToWin();
         break;
       }
     case "labour":
@@ -217,7 +217,7 @@ function hints(hint) {
         break;
       } else {
         sacrificeResult.textContent = "Click 'Earn 1 gold' 100 times in a row.";
-        timeWinCon = true;
+      timeToWin();
         break;
       }
     case "goodBehaviour":
@@ -233,7 +233,7 @@ function hints(hint) {
       } else {
         sacrificeResult.textContent =
           "Do not own any slaves while owning peasants and soldiers.";
-        timeWinCon = true;
+       timeToWin();
         break;
       }
   }
