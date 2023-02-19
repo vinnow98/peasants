@@ -158,7 +158,7 @@ function sacrificeResultOriginal() {
 }
 
 function delaySacrificeResultOriginal() {
-  setTimeout(sacrificeResultOriginal, 3000);
+  setTimeout(sacrificeResultOriginal, 5000);
 }
 
 let firstHintSuffering = false;
@@ -183,6 +183,7 @@ function hints(hint) {
       } else {
         sacrificeResult.textContent =
           "To experience suffering, sacrifice a population of 300";
+        timeWinCon = true;
         break;
       }
 
@@ -200,6 +201,7 @@ function hints(hint) {
         break;
       } else {
         sacrificeResult.textContent = "Do not touch anything for 1 minute.";
+        timeWinCon = true;
         break;
       }
     case "labour":
@@ -215,6 +217,7 @@ function hints(hint) {
         break;
       } else {
         sacrificeResult.textContent = "Click 'Earn 1 gold' 100 times in a row.";
+        timeWinCon = true;
         break;
       }
     case "goodBehaviour":
@@ -230,6 +233,7 @@ function hints(hint) {
       } else {
         sacrificeResult.textContent =
           "Do not own any slaves while owning peasants and soldiers.";
+        timeWinCon = true;
         break;
       }
   }
