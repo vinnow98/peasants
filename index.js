@@ -3,6 +3,7 @@ let totalPeasants = document.querySelector("#totalPeasants");
 let totalSoldiers = document.querySelector("#totalSoldiers");
 let totalPopulation = document.querySelector(".totalPopulation");
 let totalSouls = document.querySelector("#totalSouls");
+let pauseButton = document.getElementById("pause");
 
 gold = 0;
 wood = 0;
@@ -26,14 +27,55 @@ function refresh() {
 }
 
 //gold per "day"
-setInterval(() => {
-  gold += slaves * 2;
-  wood += peasants;
-  gold -= peasants;
-  gold -= soldiers * 5;
-  totalGold();
-  totalWood();
-}, 1100);
+function startResources() {
+  let resources = setInterval(() => {
+    gold += slaves * 2;
+    wood += peasants;
+    gold -= peasants;
+    gold -= soldiers * 5;
+    totalGold();
+    totalWood();
+  }, 1100);
+  if (!intervalIds.includes(resources)) {
+    intervalIds.push(resources);
+  }
+}
+
+//pause function
+let intervalIds = [];
+let pauseTimer = 0;
+let pause = false;
+startResources();
+document.getElementById("pause").addEventListener("click", toggleIntervals);
+
+function toggleIntervals() {
+  buttons = document.querySelectorAll("button");
+  if (pause == false) {
+    for (let i = 0; i < intervalIds.length; i++) {
+      clearInterval(intervalIds[i]);
+    }
+
+    buttons.forEach((buttons) => {
+      buttons.disabled = true;
+    });
+    pauseButton.disabled = false;
+    pauseButton.textContent = "Resume";
+    countDownState = false;
+    pause = true;
+  } else {
+    buttons.forEach((buttons) => {
+      buttons.disabled = false;
+    });
+    startResources();
+    if (enemySoldierCount != 0) {
+      countDown(pauseTimer, enemySoldierCount);
+    }
+    console.log(enemySoldierCount);
+    pauseButton.textContent = "Pause";
+    pause = false;
+    showPopulation();
+  }
+}
 
 //Punishment if negative gold!
 setInterval(() => {
@@ -72,15 +114,20 @@ function totalGold() {
   if (gold > 100) {
     showSlaves = document.querySelector("#slaveSection");
     showSlaves.style.visibility = "visible";
-    //this starts the first wave of enemies
-    countDown(90);
   }
 }
 
 function earn1Gold() {
   gold++;
   totalGold();
-  if (labourClicks == 100 && !achievedLabour) {
+  if (gold === 100) {
+    //this starts the first wave of enemies
+    countDown(
+      90,
+      (enemySoldierCount = randomGeneratedNumber(minSoldiers, maxSoldiers))
+    );
+  }
+  if (labourClicks > 100 && !achievedLabour) {
     alert("You have laboured well.");
     achievedLabour = true;
     document.querySelector(".labour").style.opacity = 1;
@@ -177,6 +224,9 @@ function toggleBuyingSlaves() {
     document.getElementById("addPopulation").style.visibility = "visible";
   } else {
     document.getElementById("buySlave").disabled = false;
+    if (maxPopulation == 300) {
+      document.getElementById("addPopulation").disabled = true;
+    }
   }
 }
 
@@ -195,10 +245,6 @@ function addPopulation() {
   totalGold();
   totalWood();
   showPopulation();
-
-  if (maxPopulation == 300) {
-    document.getElementById("addPopulation").disabled = true;
-  }
 }
 
 function youDied() {

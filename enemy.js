@@ -5,44 +5,54 @@ let maxSoldiers = 3;
 
 //random gives me a random number of soldiers
 
-let enemySoldierCount = null;
+let enemySoldierCount = 0;
 
 function randomGeneratedNumber(min, max) {
   let random = Math.floor(Math.random() * (max - min + 1)) + min;
   return random;
 }
-function countDown(num) {
+function countDown(num, enemy) {
   if (countDownState) return;
-  document.getElementById("enemySoldiers").style.visibility = "visible";
   countDownState = true;
-  enemySoldierCount = randomGeneratedNumber(minSoldiers, maxSoldiers);
-  document.querySelector("#noOfSoldiers").textContent = enemySoldierCount;
-  timer = setInterval(() => {
+  document.getElementById("enemySoldiers").style.visibility = "visible";
+  document.querySelector("#noOfSoldiers").textContent = enemy;
+  enemySoldierCount = enemy;
+  countDownTimer = setInterval(() => {
     num--;
+    pauseButton.disabled = false;
     document.querySelector("#countDown").textContent = num;
+    //this is for the pause function
+    pauseTimer = num;
 
     if (num == 0) {
+      pauseButton.disabled = true;
       fight();
-      clearInterval(timer);
+      clearInterval(countDownTimer);
     }
   }, 1000);
+  if (!intervalIds.includes(countDownTimer)) {
+    intervalIds.push(countDownTimer);
+  }
 }
 
 function fight() {
-  let timer = setInterval(() => {
+  let fightTimer = setInterval(() => {
     soldiers--;
     enemySoldierCount--;
     document.querySelector("#noOfSoldiers").textContent = enemySoldierCount;
     refresh();
-    if (enemySoldierCount == 0) {
-      clearInterval(timer);
+    if (soldiers < 0) {
+      clearInterval(fightTimer);
+      youDied();
+    } else if (enemySoldierCount == 0) {
+      clearInterval(fightTimer);
       minSoldiers++;
       maxSoldiers++;
       countDownState = false;
-      countDown(randomGeneratedNumber(45, 65));
-    } else if (soldiers < 0) {
-      clearInterval(timer);
-      youDied();
+      countDown(
+        randomGeneratedNumber(45, 65),
+        randomGeneratedNumber(minSoldiers, maxSoldiers)
+      );
     }
   }, 500);
 }

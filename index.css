@@ -42,22 +42,43 @@ body {
 
 #continue {
   margin-top: 2vh;
-  height: 6vh;
+  height: 9vh;
   border-radius: 100px;
-  font-size: 5vw;
+  font-size: 6vw;
+  padding:5%;
   font-family: 'Liu Jian Mao Cao',serif;
-}
-h1 {
-  flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
+
+}
+#header{
+  display: flex;
+}
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 275%;
+}
+
+h1 {
+  flex-grow: 1;
+  text-align: center;
 }
 button {
   font-size: 1.6vh;
   width: 28vw;
 }
-
+#pause{
+  border-radius: 100vw;
+  height: 6vh;
+  width: 6vh;
+  font-size: 1.3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #topSection button {
   height: 6vh;
 }

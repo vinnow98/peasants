@@ -6,6 +6,7 @@ achievedGoodBehaviour = false;
 sufferingWinCon = false;
 goodBehaviourWinCon = false;
 labourWinCon = false;
+labourActivated = false;
 meditationWinCon = false;
 timeWinCon = false;
 setTimeout(timeToWin, 600000);
@@ -25,7 +26,9 @@ function activateNirvana() {
     timeWinCon == true
   ) {
     console.log("Nirvana activated");
-    labour();
+    if (!labourActivated) {
+      labour();
+    }
     goodBehaviour();
     meditation();
     document.querySelector("#nirvanaSection").style.visibility = "visible";
@@ -70,7 +73,8 @@ function meditation() {
 
 labourTimeout = false;
 function labour() {
-  if (!timeWinCon) return;
+  if (!timeWinCon || !labourWinCon) return;
+  labourActivated = true;
   document.getElementById("earn1Gold").addEventListener("click", () => {
     labourClicks++;
     console.log(labourClicks);
@@ -183,7 +187,7 @@ function hints(hint) {
       } else {
         sacrificeResult.textContent =
           "To experience suffering, sacrifice a population of 300";
-      timeToWin();
+        timeToWin();
         break;
       }
 
@@ -201,7 +205,7 @@ function hints(hint) {
         break;
       } else {
         sacrificeResult.textContent = "Do not touch anything for 1 minute.";
-      timeToWin();
+        timeToWin();
         break;
       }
     case "labour":
@@ -217,7 +221,10 @@ function hints(hint) {
         break;
       } else {
         sacrificeResult.textContent = "Click 'Earn 1 gold' 100 times in a row.";
-      timeToWin();
+        timeToWin();
+        if (!labourActivated) {
+          labour();
+        }
         break;
       }
     case "goodBehaviour":
@@ -233,7 +240,7 @@ function hints(hint) {
       } else {
         sacrificeResult.textContent =
           "Do not own any slaves while owning peasants and soldiers.";
-       timeToWin();
+        timeToWin();
         break;
       }
   }
