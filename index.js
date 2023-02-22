@@ -60,6 +60,7 @@ function toggleIntervals() {
     });
     pauseButton.disabled = false;
     pauseButton.textContent = "Resume";
+    meditation();
     countDownState = false;
     pause = true;
   } else {
@@ -73,6 +74,8 @@ function toggleIntervals() {
     console.log(enemySoldierCount);
     pauseButton.textContent = "Pause";
     pause = false;
+    meditation();
+    reachedNirvana();
     showPopulation();
   }
 }

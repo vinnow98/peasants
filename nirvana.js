@@ -9,7 +9,7 @@ labourWinCon = false;
 labourActivated = false;
 meditationWinCon = false;
 timeWinCon = false;
-setTimeout(timeToWin, 600000);
+setTimeout(timeToWin, 450000);
 
 function timeToWin() {
   console.log("timeToWin activated");
@@ -51,7 +51,7 @@ function suffering() {
 
 var meditationTimeout = false;
 function meditation() {
-  if (!timeWinCon) return;
+  if (!timeWinCon || !meditationWinCon) return;
   clearTimeout(meditationTimeout);
   meditationTimeout = setTimeout(function () {
     alert("You have meditated sufficiently.");
@@ -69,6 +69,9 @@ function meditation() {
   document.addEventListener("keydown", meditation);
   document.addEventListener("mousedown", meditation);
   document.addEventListener("mousemove", meditation);
+  if (pause == true) {
+    clearTimeout(meditationTimeout);
+  }
 }
 
 labourTimeout = false;
@@ -113,8 +116,11 @@ function reachedNirvana() {
     achievedSuffering
   ) {
     document.querySelector("#reachedNirvana").disabled = false;
+  } else {
+    document.querySelector("#reachedNirvana").disabled = true;
   }
 }
+
 sacrificeResult = document.querySelector("#sacrificeResult");
 let originalTextCooldown = false;
 let originalText = sacrificeResult.textContent;
